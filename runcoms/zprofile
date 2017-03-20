@@ -6,7 +6,7 @@
 #
 
 export DYLD_FORCE_FLAT_NAMESPACE=1
-export PP_DEPLOY_KEY=$(cat ~/.ssh/pp_deploy_rsa)
+export PP_DEPLOY_KEY="$(cat "$HOME/.ssh/pp_deploy_rsa")"
 
 # Node
 export NODE_ENV="development"
