@@ -1,9 +1,19 @@
 #
 # Executes commands at login pre-zshrc.
+
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+# Environment
 #
+
+export DYLD_FORCE_FLAT_NAMESPACE=1
+export PP_DEPLOY_KEY=$(cat ~/.ssh/pp_deploy_rsa)
+
+# Node
+export NODE_ENV="development"
+export NVM_DIR="$HOME/.nvm"
+
+#Python
+export WORKON_HOME="$HOME/Documents/Development/venvs"
 
 #
 # Browser
@@ -17,8 +27,8 @@ fi
 # Editors
 #
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='vim'
+export VISUAL='vim'
 export PAGER='less'
 
 #

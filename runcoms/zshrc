@@ -1,13 +1,34 @@
 #
 # Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+# iterm shell integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# source virtualenv
+source /usr/local/bin/virtualenvwrapper_lazy.sh
+
+# Exports environment variables defined in a .env or .localenv file
+function setenv() {
+  if [ -f .env ]; then
+    export $(cat .env | xargs)
+  fi
+  if [ -f .localenv ]; then
+    export $(cat .localenv | xargs)
+  fi
+}
+
+function randomness(){
+  export RANDOMNESS=$(openssl rand -base64 10)
+}
+
+# Docker
+function dcr() {
+   echo "DCR'in $@"
+   randomness
+   docker-compose up --build $@
+}
