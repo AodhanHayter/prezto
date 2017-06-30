@@ -79,8 +79,11 @@ function prompt_sorin_precmd {
   # Format PWD.
   prompt_sorin_pwd
 
+  # node.js version info
+  node-info
+
   # Define prompts.
-  RPROMPT='%{$fg[red]%}${DOCKER_MACHINE_NAME}%{$reset_color%} ${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'
+  RPROMPT='${node_info[version]}${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'
 
   # Kill the old process of slow commands if it is still running.
   if (( _prompt_sorin_precmd_async_pid > 0 )); then
@@ -130,8 +133,11 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:keys' format \
     'status' '$(coalesce "%b" "%p" "%c")%s%A%B%S%a%d%m%r%U%u'
 
+  # %v - Node.js version.
+  zstyle ':prezto:module:node:info:version' format 'node:%v'
+
   # Define prompts.
-  PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
+  PROMPT='${DOCKER_MACHINE_NAME}${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }

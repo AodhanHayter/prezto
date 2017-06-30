@@ -22,8 +22,17 @@ function setenv() {
   fi
 }
 
-function randomness(){
+function randomness() {
   export RANDOMNESS=$(openssl rand -base64 10)
+}
+
+#
+# Node
+#
+
+function get_nvm_bin() {
+  local version=$(nvm current)
+  echo "$NVM_DIR/versions/node/$version"
 }
 
 #
@@ -45,11 +54,9 @@ function dcr() {
 
 # generate ctags for entire python environment and project directory
 function pytags() {
-  ctags -R --fields=+l --languages=python -f ./tags $(python -c "import os, sys; print(' '.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))") && \
-  pytags-append
+  ctags -R --fields=+l --languages=python -f ./tags \
+    $(python -c "import os, sys; print(' '.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))") .
 }
 
-# append existing ctags file with current directories tags
-function pytags-append() {
-  ctags -R --fields=+l --languages=python -a -f ./tags .
-}
+
+export PATH="$HOME/.yarn/bin:$PATH"
